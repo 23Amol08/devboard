@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import { TextField } from '@mui/material';
 import { Button } from '@mui/material';
 import axios from "axios";
+import Navbar from "../components/Navbar";
 
 function Signup(){
 
@@ -26,7 +27,7 @@ function Signup(){
   }
 
  async function handleSubmit(e){
-  e.preventDefault();    
+  e.preventDefault();
   try{
         const res = await axios.post("http://localhost:5000/api/signup" , signupData);
             setMessage(res.data.message || "Signup Successfull")
@@ -38,7 +39,8 @@ function Signup(){
       
   }
 
-    return (
+    return (<div>
+      <Navbar />
      <div className="container">   
         <h1>SignUp</h1>
         <Box component="section" sx={{ p: 2, border: '1px dashed grey' , margin : 2 }}>
@@ -52,6 +54,10 @@ function Signup(){
       <Button type="submit" variant="contained" color="primary" >Signup</Button>
       </form>
     </Box>
+    {message && (<p style={{ color: error ? 'red' : 'green' }}>{message}</p>)}
+    </div>
+    
+
     </div>
     )
 }
